@@ -20,6 +20,7 @@ import NotLoggedInRoutes from "./routes/NotLoggedInRoutes";
 
 //fnctions
 import { postsReducer } from "./functions/reducers";
+import ModernLoginPage from "./pages/login/loginPage";
 
 function App() {
   const [visible, setVisible] = useState(false);
@@ -40,7 +41,7 @@ function App() {
         type: "POSTS_REQUEST",
       });
       const { data } = await axios.get(
-        `http://localhost:8000/getAllposts`,
+        `https://social-media2-0t94.onrender.com/getAllposts`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -114,7 +115,7 @@ function App() {
           <Route path="/activate/:token" element={<Activate />} exact />
         </Route>
         <Route element={<NotLoggedInRoutes />}>
-          <Route path="/login" element={<Login />} exact />
+          <Route path="/login" element={<ModernLoginPage />} exact />
         </Route>
         <Route path="/reset" element={<Reset />} />
       </Routes>

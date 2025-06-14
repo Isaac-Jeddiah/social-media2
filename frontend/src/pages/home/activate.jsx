@@ -26,7 +26,7 @@ export default function Activate() {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `http://localhost:8000/activate`,
+        `https://social-media2-0t94.onrender.com/activate`,
         { token },
         {
           headers: {

@@ -78,7 +78,7 @@ export default function RegisterForm({ setVisible }) {
   const registerSubmit = async () => {
     try {
       const { data } = await axios.post(
-        `http://localhost:8000/register`,
+        `https://social-media2-0t94.onrender.com/register`,
         {
           first_name,
           last_name,
@@ -116,7 +116,7 @@ export default function RegisterForm({ setVisible }) {
     <div className="blur">
       <div className="register">
         <div className="register_header">
-          <i className="exit_icon" onClick={() => setVisible(false)}></i>
+          <i className="exit_icon" onClick={() => setVisible(true)}></i>
           <span>Sign Up</span>
           <span>it's quick and easy</span>
         </div>

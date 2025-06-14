@@ -26,7 +26,7 @@ export default function CodeVerification({
     try {
       setLoading(true);
       await axios.post(
-        `http://localhost:8000/validateResetCode`,
+        `https://social-media2-0t94.onrender.com/validateResetCode`,
         { email, code }
       );
       setVisible(3);

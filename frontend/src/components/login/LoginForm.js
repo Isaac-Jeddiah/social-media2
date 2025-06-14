@@ -34,7 +34,7 @@ export default function LoginForm({ setVisible }) {
     try {
       setLoading(true);
       const { data } = await axios.post(
-        `http://localhost:8000/login`,
+        `https://social-media2-0t94.onrender.com/login`,
         {
           email,
           password,
@@ -50,12 +50,7 @@ export default function LoginForm({ setVisible }) {
   };
   return (
     <div className="login_wrap">
-      <div className="login_1">
-        <img src="../../icons/facebook.svg" alt="" />
-        <span>
-          Facebook helps you connect and share with the people in your life.
-        </span>
-      </div>
+      
       <div className="login_2">
         <div className="login_2_wrap">
           <Formik

@@ -8,7 +8,7 @@ export default function SendVerification({ user }) {
   const sendVerificationLink = async () => {
     try {
       const { data } = await axios.post(
-        `http://localhost:8000/sendVerification`,
+        `https://social-media2-0t94.onrender.com/sendVerification`,
         {},
         {
           headers: {

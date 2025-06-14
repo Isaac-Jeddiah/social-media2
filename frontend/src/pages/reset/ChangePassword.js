@@ -33,7 +33,7 @@ export default function ChangePassword({
   const changePassword = async () => {
     try {
       setLoading(true);
-      await axios.post(`http://localhost:8000/changePassword`, {
+      await axios.post(`https://social-media2-0t94.onrender.com/changePassword`, {
         email,
         password,
       });

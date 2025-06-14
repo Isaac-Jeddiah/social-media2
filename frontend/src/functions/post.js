@@ -9,7 +9,7 @@ export const createPost = async (
 ) => {
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/createPost`,
+      `https://social-media2-0t94.onrender.com/createPost`,
       {
         type,
         background,
@@ -31,7 +31,7 @@ export const createPost = async (
 export const reactPost = async (postId, react, token) => {
   try {
     const { data } = await axios.put(
-      `http://localhost:8000/reactPost`,
+      `https://social-media2-0t94.onrender.com/reactPost`,
       {
         postId,
         react,
@@ -50,7 +50,7 @@ export const reactPost = async (postId, react, token) => {
 export const getReacts = async (postId, token) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:8000/getReacts/${postId}`,
+      `https://social-media2-0t94.onrender.com/getReacts/${postId}`,
 
       {
         headers: {
@@ -66,7 +66,7 @@ export const getReacts = async (postId, token) => {
 export const comment = async (postId, comment, image, token) => {
   try {
     const { data } = await axios.put(
-      `http://localhost:8000/comment`,
+      `https://social-media2-0t94.onrender.com/comment`,
       {
         postId,
         comment,
@@ -87,7 +87,7 @@ export const comment = async (postId, comment, image, token) => {
 export const savePost = async (postId, token) => {
   try {
     const { data } = await axios.put(
-      `http://localhost:8000/savePost/${postId}`,
+      `https://social-media2-0t94.onrender.com/savePost/${postId}`,
       {},
 
       {
@@ -104,7 +104,7 @@ export const savePost = async (postId, token) => {
 export const deletePost = async (postId, token) => {
   try {
     const { data } = await axios.delete(
-      `http://localhost:8000/deletePost/${postId}`,
+      `https://social-media2-0t94.onrender.com/deletePost/${postId}`,
 
       {
         headers: {

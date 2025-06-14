@@ -53,7 +53,7 @@ export default function Profile({ getAllPosts }) {
         type: "PROFILE_REQUEST",
       });
       const { data } = await axios.get(
-        `http://localhost:8000/getProfile/${userName}`,
+        `https://social-media2-0t94.onrender.com/getProfile/${userName}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -65,7 +65,7 @@ export default function Profile({ getAllPosts }) {
       } else {
         try {
           const images = await axios.post(
-            `http://localhost:8000/listImages`,
+            `https://social-media2-0t94.onrender.com/listImages`,
             { path, sort, max },
             {
               headers: {

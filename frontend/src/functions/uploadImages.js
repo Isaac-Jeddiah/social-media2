@@ -3,7 +3,7 @@ import axios from "axios";
 export const uploadImages = async (formData, path, token) => {
   try {
     const { data } = await axios.post(
-      `http://localhost:8000/uploadImages`,
+      `https://social-media2-0t94.onrender.com/uploadImages`,
       formData,
       {
         headers: {

@@ -25,7 +25,7 @@ export default function SearchAccount({
       setLoading(true);
 
       const { data } = await axios.post(
-        `http://localhost:8000/findUser`,
+        `https://social-media2-0t94.onrender.com/findUser`,
         { email }
       );
       setUserInfos(data);

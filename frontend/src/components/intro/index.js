@@ -32,7 +32,7 @@ export default function Intro({ detailss, visitor, setOthername }) {
     try {
       console.log("sent");
       const { data } = await axios.put(
-        `http://localhost:8000/updateDetails`,
+        `https://social-media2-0t94.onrender.com/updateDetails`,
         {
           infos,
         },

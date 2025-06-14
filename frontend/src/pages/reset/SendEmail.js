@@ -15,7 +15,7 @@ export default function SendEmail({
     try {
       setLoading(true);
       await axios.post(
-        `http://localhost:8000/sendResetPasswordCode`,
+        `https://social-media2-0t94.onrender.com/sendResetPasswordCode`,
         { email }
       );
       setError("");
