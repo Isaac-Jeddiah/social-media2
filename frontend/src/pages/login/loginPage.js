@@ -5,18 +5,7 @@ import LoginForm from '../../components/login/LoginForm';
 import RegisterForm from '../../components/login/RegisterForm';
 const ModernLoginPage = () => {
   const [isSignUp, setIsSignUp] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    birthDay: '',
-    birthMonth: '',
-    birthYear: '',
-    gender: ''
-  });
+ 
 
   // Refs for animations
   const containerRef = useRef(null);
@@ -28,80 +17,11 @@ const ModernLoginPage = () => {
   const signupButtonRef = useRef(null);
   const ballsRef = useRef([]);
 
-  // Form validation
-  const [errors, setErrors] = useState({});
-  const [loading, setLoading] = useState(false);
 
-  // Generate options for date selectors
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 100 }, (_, i) => currentYear - i);
-  const months = Array.from({ length: 12 }, (_, i) => i + 1);
-  const days = Array.from({ length: 31 }, (_, i) => i + 1);
-
+  
   useEffect(() => {
     // Initialize GSAP animations
-    const initAnimations = () => {
-      // Floating animation for bicycle
-      if (bicycleRef.current) {
-        const tl = gsap.timeline({ repeat: -1, yoyo: true });
-        tl.to(bicycleRef.current, {
-          y: -15,
-          rotation: 10,
-          duration: 3,
-          ease: "power2.inOut"
-        });
-      }
-
-      // Floating balls animation
-      ballsRef.current.forEach((ball, index) => {
-        if (ball) {
-          gsap.to(ball, {
-            y: Math.random() * 40 - 20,
-            x: Math.random() * 20 - 10,
-            rotation: 360,
-            duration: 2 + Math.random() * 2,
-            repeat: -1,
-            yoyo: true,
-            ease: "power2.inOut",
-            delay: index * 0.3
-          });
-        }
-      });
-
-      // Initial card animations
-      gsap.fromTo(loginCardRef.current, {
-        x: -100,
-        opacity: 0,
-        scale: 0.9
-      }, {
-        x: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        ease: "power3.out"
-      });
-
-      gsap.fromTo(bicycleRef.current, {
-        scale: 0,
-        rotation: -180
-      }, {
-        scale: 1,
-        rotation: 0,
-        duration: 1.2,
-        ease: "back.out(1.7)",
-        delay: 0.3
-      });
-    };
-
-    // Add GSAP script if not already loaded
-    if (!window.gsap) {
-      const script = document.createElement('script');
-      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js';
-      script.onload = initAnimations;
-      document.head.appendChild(script);
-    } else {
-      initAnimations();
-    }
+    
   }, []);
 
   const handleToggleForm = () => {
@@ -190,67 +110,11 @@ const ModernLoginPage = () => {
     setIsSignUp(!isSignUp);
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    
-    // Clear error for this field
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
+  
 
-  const validateForm = () => {
-    const newErrors = {};
-    
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-    }
-    
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
-    
-    if (isSignUp) {
-      if (!formData.firstName) newErrors.firstName = 'First name is required';
-      if (!formData.lastName) newErrors.lastName = 'Last name is required';
-      if (!formData.confirmPassword) {
-        newErrors.confirmPassword = 'Confirm password is required';
-      } else if (formData.password !== formData.confirmPassword) {
-        newErrors.confirmPassword = 'Passwords do not match';
-      }
-      if (!formData.gender) newErrors.gender = 'Gender is required';
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    if (!validateForm()) return;
-    
-    setLoading(true);
-    
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
-      console.log('Form submitted:', formData);
-      // Handle successful submission
-    }, 2000);
-  };
 
+  
   return (
     <div className="min-h-screen overflow-hidden bg-gray-100">
       {/* Main Container */}
@@ -323,7 +187,10 @@ const ModernLoginPage = () => {
               </div>
             </div>
           </div> */}
+             <div className="w-1/2 h-full bg-gradient-to-br from-violet-600 via-indigo-600 to-purple-600 flex items-center justify-center">
+        
           <LoginForm />
+          </div>
           {/* Center Divider with Bicycle and Signup Button */}
           <div className="absolute left-1/2 top-0 w-10 h-full bg-white shadow-2xl transform -translate-x-1/2 z-10 flex flex-col items-center justify-center">
             {/* Bicycle Animation */}
@@ -367,7 +234,7 @@ const ModernLoginPage = () => {
           </div>
 
           {/* Right Side - Visual Background */}
-          <div className="w-1/2 bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 flex items-center justify-center">
+          <div className="w-1/2 h-full bg-gradient-to-br from-emerald-500 via-cyan-500 to-blue-500 flex items-center justify-center">
             <div className="text-center text-white">
               <h1 className="text-5xl font-bold mb-4">Join Us Today</h1>
               <p className="text-xl opacity-90">Create your account and explore amazing features</p>
@@ -378,7 +245,7 @@ const ModernLoginPage = () => {
         {/* Right Side - Signup */}
         <div className="w-screen h-screen flex relative">
           {/* Left Visual Background */}
-          <div className="w-1/2 bg-gradient-to-br from-violet-600 via-indigo-600 to-purple-600 flex items-center justify-center">
+          <div className="w-1/2 h-full bg-gradient-to-br from-violet-600 via-indigo-600 to-purple-600 flex items-center justify-center">
             <div className="text-center text-white">
               <h1 className="text-5xl font-bold mb-4">Welcome!</h1>
               <p className="text-xl opacity-90">Already have an account? Sign in to continue</p>
@@ -396,9 +263,9 @@ const ModernLoginPage = () => {
           </div>
 
           {/* Signup Card Side */}
-          <div className="w-1/2 bg-gradient-to-br from-rose-500 via-pink-500 to-purple-500 flex items-center justify-center p-6">
+          <div className="w-1/2 h-full bg-gradient-to-br from-rose-500 via-pink-500 to-purple-500 flex items-center justify-center p-6">
             <div ref={signupCardRef} className="w-full max-w-md opacity-0">
-              <RegisterForm />
+              <RegisterForm setVisible={true} />
             </div>
           </div>
          
