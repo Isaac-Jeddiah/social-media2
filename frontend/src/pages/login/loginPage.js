@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { User, Mail, Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react';
-import gsap from 'gsap';
+//import gsap from 'gsap';
 import LoginForm from '../../components/login/LoginForm';
 import RegisterForm from '../../components/login/RegisterForm';
 const ModernLoginPage = () => {
@@ -19,96 +19,96 @@ const ModernLoginPage = () => {
 
 
   
-  useEffect(() => {
-    // Initialize GSAP animations
+  // useEffect(() => {
+  //   // Initialize GSAP animations
     
-  }, []);
+  // }, []);
 
-  const handleToggleForm = () => {
-    const tl = gsap.timeline();
+  // const handleToggleForm = () => {
+  //   const tl = gsap.timeline();
     
-    if (!isSignUp) {
-      // Hide signup button first
-      tl.to(signupButtonRef.current, {
-        scale: 0,
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in"
-      })
-      // Animate bicycle to right side
-      .to(bicycleRef.current, {
-        x: '100vw',
-        y: -50,
-        rotation: 180,
-        scale: 0.8,
-        duration: 1.2,
-        ease: "power2.inOut"
-      }, "-=0.1")
-      // Animate balls to follow
-      .to(ballsRef.current, {
-        x: '80vw',
-        scale: 0.6,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power2.inOut"
-      }, "-=1")
-      // Slide entire container to show signup
-      .to(containerRef.current, {
-        x: '-50%',
-        duration: 1,
-        ease: "power2.inOut"
-      }, "-=0.8")
-      // Fade in signup card
-      .fromTo(signupCardRef.current, {
-        x: 100,
-        opacity: 0,
-        scale: 0.9
-      }, {
-        x: 0,
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: "power3.out"
-      }, "-=0.5");
-    } else {
-      // Reverse animation
-      tl.to(signupCardRef.current, {
-        x: 100,
-        opacity: 0,
-        scale: 0.9,
-        duration: 0.5,
-        ease: "power2.in"
-      })
-      .to(containerRef.current, {
-        x: '0%',
-        duration: 1,
-        ease: "power2.inOut"
-      }, "-=0.3")
-      .to(bicycleRef.current, {
-        x: 0,
-        y: 0,
-        rotation: 0,
-        scale: 1,
-        duration: 1.2,
-        ease: "power2.inOut"
-      }, "-=1")
-      .to(ballsRef.current, {
-        x: 0,
-        scale: 1,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power2.inOut"
-      }, "-=1")
-      .to(signupButtonRef.current, {
-        scale: 1,
-        opacity: 1,
-        duration: 0.4,
-        ease: "back.out(1.7)"
-      }, "-=0.3");
-    }
+  //   if (!isSignUp) {
+  //     // Hide signup button first
+  //     tl.to(signupButtonRef.current, {
+  //       scale: 0,
+  //       opacity: 0,
+  //       duration: 0.3,
+  //       ease: "power2.in"
+  //     })
+  //     // Animate bicycle to right side
+  //     .to(bicycleRef.current, {
+  //       x: '100vw',
+  //       y: -50,
+  //       rotation: 180,
+  //       scale: 0.8,
+  //       duration: 1.2,
+  //       ease: "power2.inOut"
+  //     }, "-=0.1")
+  //     // Animate balls to follow
+  //     .to(ballsRef.current, {
+  //       x: '80vw',
+  //       scale: 0.6,
+  //       duration: 1,
+  //       stagger: 0.1,
+  //       ease: "power2.inOut"
+  //     }, "-=1")
+  //     // Slide entire container to show signup
+  //     .to(containerRef.current, {
+  //       x: '-50%',
+  //       duration: 1,
+  //       ease: "power2.inOut"
+  //     }, "-=0.8")
+  //     // Fade in signup card
+  //     .fromTo(signupCardRef.current, {
+  //       x: 100,
+  //       opacity: 0,
+  //       scale: 0.9
+  //     }, {
+  //       x: 0,
+  //       opacity: 1,
+  //       scale: 1,
+  //       duration: 0.8,
+  //       ease: "power3.out"
+  //     }, "-=0.5");
+  //   } else {
+  //     // Reverse animation
+  //     tl.to(signupCardRef.current, {
+  //       x: 100,
+  //       opacity: 0,
+  //       scale: 0.9,
+  //       duration: 0.5,
+  //       ease: "power2.in"
+  //     })
+  //     .to(containerRef.current, {
+  //       x: '0%',
+  //       duration: 1,
+  //       ease: "power2.inOut"
+  //     }, "-=0.3")
+  //     .to(bicycleRef.current, {
+  //       x: 0,
+  //       y: 0,
+  //       rotation: 0,
+  //       scale: 1,
+  //       duration: 1.2,
+  //       ease: "power2.inOut"
+  //     }, "-=1")
+  //     .to(ballsRef.current, {
+  //       x: 0,
+  //       scale: 1,
+  //       duration: 1,
+  //       stagger: 0.1,
+  //       ease: "power2.inOut"
+  //     }, "-=1")
+  //     .to(signupButtonRef.current, {
+  //       scale: 1,
+  //       opacity: 1,
+  //       duration: 0.4,
+  //       ease: "back.out(1.7)"
+  //     }, "-=0.3");
+  //   }
     
-    setIsSignUp(!isSignUp);
-  };
+  //   setIsSignUp(!isSignUp);
+  // };
 
   
 
@@ -255,7 +255,7 @@ const ModernLoginPage = () => {
           {/* Center Divider */}
           <div className="absolute left-1/2 top-0 w-20 h-full bg-white shadow-2xl transform -translate-x-1/2 z-10 flex flex-col items-center justify-center">
             <button
-              onClick={handleToggleForm}
+              
               className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white p-3 rounded-full hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-110 shadow-lg"
             >
               <ArrowLeft size={20} />
