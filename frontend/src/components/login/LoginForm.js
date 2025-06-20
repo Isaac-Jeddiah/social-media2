@@ -99,9 +99,7 @@ export default function LoginForm({ setVisible }) {
             Create Account
           </button>
         </div>
-        <Link to="/" className="sign_extra">
-          <b>Create a Page</b> for a celebrity, brand or business.
-        </Link>
+        
       </div>
     </div>
   );

@@ -123,85 +123,17 @@ const ModernLoginPage = () => {
         {/* Left Side - Login */}
         <div ref={leftSideRef} className="w-screen h-screen flex relative">
           {/* Login Card Side */}
-          {/* <div className="w-1/2 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 flex items-center justify-center p-8">
-            <div ref={loginCardRef} className="w-full max-w-md">
-              <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border border-white/30">
-                <div className="text-center mb-8">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full mb-4">
-                    <User className="w-8 h-8 text-white" />
-                  </div>
-                  <h2 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h2>
-                  <p className="text-gray-600">Sign in to your account</p>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="Email address"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-12 py-4 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
-                    />
-                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                  </div>
-
-                  <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      name="password"
-                      placeholder="Password"
-                      value={formData.password}
-                      onChange={handleInputChange}
-                      className="w-full bg-gray-50 border border-gray-200 rounded-xl px-12 py-4 text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-                    >
-                      {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                    </button>
-                    {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={handleSubmit}
-                    disabled={loading}
-                    className="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-semibold py-4 px-6 rounded-xl hover:from-indigo-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
-                  >
-                    {loading ? (
-                      <div className="flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                        Signing in...
-                      </div>
-                    ) : (
-                      'Sign In'
-                    )}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div> */}
+        
              <div className="w-1/2 h-full bg-gradient-to-br from-violet-600 via-indigo-600 to-purple-600 flex items-center justify-center">
         
           <LoginForm />
           </div>
           {/* Center Divider with Bicycle and Signup Button */}
-          <div className="absolute left-1/2 top-0 w-10 h-full bg-white shadow-2xl transform -translate-x-1/2 z-10 flex flex-col items-center justify-center">
+          <div className="absolute left-1/2 top-0 w-0 h-full bg-white shadow-2xl transform -translate-x-1/2 z-10 flex flex-col items-center justify-center">
             {/* Bicycle Animation */}
             <div ref={bicycleRef} className="mb-8">
               <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-gray-600">
-                <circle cx="18.5" cy="17.5" r="3.5"/>
-                <circle cx="5.5" cy="17.5" r="3.5"/>
-                <path d="m15 6-3.5 7 3.5 7"/>
-                <path d="m12 6 3.5 7-3.5 7"/>
-                <path d="M9 12h3"/>
-                <path d="m6 9 6-3 6 3"/>
+                
               </svg>
             </div>
 
@@ -253,7 +185,7 @@ const ModernLoginPage = () => {
           </div>
 
           {/* Center Divider */}
-          <div className="absolute left-1/2 top-0 w-20 h-full bg-white shadow-2xl transform -translate-x-1/2 z-10 flex flex-col items-center justify-center">
+          <div className="absolute left-1/2 top-0 w-0 h-full bg-white shadow-2xl transform -translate-x-1/2 z-10 flex flex-col items-center justify-center">
             <button
               onClick={handleToggleForm}
               className="bg-gradient-to-r from-indigo-500 to-purple-500 text-white p-3 rounded-full hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-110 shadow-lg"

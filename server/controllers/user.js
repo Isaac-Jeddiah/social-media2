@@ -10,7 +10,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const cloudinary = require("cloudinary");
 const { generateToken } = require("../helpers/tokens");
-const { sendVerificationEmail, sendResetCode } = require("../helpers/mailer");
+//const { sendVerificationEmail, sendResetCode } = require("../helpers/mailer");
 const generateCode = require("../helpers/generateCode");
 const mongoose = require("mongoose");
 
@@ -28,11 +28,7 @@ exports.register = async (req, res) => {
       gender,
     } = req.body;
 
-    if (!validateEmail(email)) {
-      return res.status(400).json({
-        message: "invalid email address",
-      });
-    }
+    
     const check = await User.findOne({ email });
     if (check) {
       return res.status(400).json({
@@ -77,7 +73,7 @@ exports.register = async (req, res) => {
       "30m"
     );
     const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`;
-    sendVerificationEmail(user.email, user.first_name, url);
+    //sendVerificationEmail(user.email, user.first_name, url);
     const token = generateToken({ id: user._id.toString() }, "7d");
     res.send({
       id: user._id,
@@ -166,7 +162,7 @@ exports.sendVerification = async (req, res) => {
       "30m"
     );
     const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`;
-    sendVerificationEmail(user.email, user.first_name, url);
+    //sendVerificationEmail(user.email, user.first_name, url);
     return res.status(200).json({
       message: "Email verification link has been sent to your email.",
     });
@@ -202,7 +198,7 @@ exports.sendResetPasswordCode = async (req, res) => {
       code,
       user: user._id,
     }).save();
-    sendResetCode(user.email, user.first_name, code);
+    //sendResetCode(user.email, user.first_name, code);
     return res.status(200).json({
       message: "Email reset code has been sent to your email",
     });

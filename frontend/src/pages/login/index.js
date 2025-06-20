@@ -1,12 +1,15 @@
 import "./style.css";
-import LoginForm from "../../components/login/LoginForm";
-import Footer from "../../components/login/Footer";
-import RegisterForm from "../../components/login/RegisterForm";
+import ModernLoginPage from "./loginPage"; // Your existing login page
+import GSAPAnimatedLogin from "../landingpage/landingpage"; // The new animated component
 import { useState } from "react";
-import ModernLoginPage from "./loginPage";
 
 export default function Login() {
-  const [visible, setVisible] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(true);
+  
+  if (showAnimation) {
+    return <GSAPAnimatedLogin onComplete={() => setShowAnimation(true)} />;
+  }
+  
   return (
     <div className="login">
       <div className="login_wrapper">

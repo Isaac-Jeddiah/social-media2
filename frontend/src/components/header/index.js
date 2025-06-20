@@ -21,6 +21,7 @@ import { useRef, useState } from "react";
 import AllMenu from "./AllMenu";
 import useClickOutside from "../../helpers/clickOutside";
 import UserMenu from "./userMenu";
+import { MessageCircle } from "lucide-react";
 
 export default function Header({ page, getAllPosts }) {
   const { user } = useSelector((user) => ({ ...user }));
@@ -84,8 +85,8 @@ export default function Header({ page, getAllPosts }) {
           <Watch color={color} />
           <div className="middle_notification">9+</div>
         </Link>
-        <Link to="/" className="middle_icon hover1">
-          <Market color={color} />
+        <Link to="/chat" className="middle_icon hover1">
+          <MessageCircle color={color} />
         </Link>
         <Link to="/" className="middle_icon hover1 ">
           <Gaming color={color} />
