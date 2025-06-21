@@ -12,7 +12,11 @@ dotenv.config();
 
 // middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+  {
+    origin: ["http://localhost:3000", "https://your-production-url.com"],
+  }
+));
 app.use(
   fileUpload({
     useTempFiles: true,
