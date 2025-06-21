@@ -1,5 +1,7 @@
 const express = require("express");
-const app = express();
+const { connectDB } = require("./lib/db");
+const app = require("./lib/socket").app; // Importing the app from socket.js
+const server = require("./lib/socket").server; // Importing the server from socket.js
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const { readdirSync } = require("fs");
@@ -21,15 +23,9 @@ app.use(morgan("dev"));
 // routes
 readdirSync("./routes").map((r) => app.use("/", require("./routes/" + r)));
 
-//database
-mongoose
-  .connect(process.env.DATABASE_URL||"mongodb://localhost:27017/hello", {
-    useNewUrlParser: true,
-  })
-  .then(() => console.log("database connected successfully"))
-  .catch((err) => console.log("error connecting to mongodb", err));
 
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
+  connectDB();
 });

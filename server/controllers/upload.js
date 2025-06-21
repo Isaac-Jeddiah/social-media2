@@ -1,12 +1,11 @@
-const cloudinary = require("cloudinary");
 const fs = require("fs");
 const path = require("path");
-
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API_KEY,
-  api_secret: process.env.CLOUD_API_SECRET,
-});
+const {cloudinary} = require("../lib/cloudinary")
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME,
+//   api_key: process.env.CLOUD_API_KEY,
+//   api_secret: process.env.CLOUD_API_SECRET,
+// });
 
 exports.uploadImages = async (req, res) => {
   try {
