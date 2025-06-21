@@ -465,7 +465,7 @@ exports.acceptRequest = async (req, res) => {
         await receiver.updateOne({
           $push: { friends: sender._id, following: sender._id },
         });
-        await sender.update({
+        await sender.updateOne({
           $push: { friends: receiver._id, followers: receiver._id },
         });
         await receiver.updateOne({
@@ -502,7 +502,7 @@ exports.unfriend = async (req, res) => {
             followers: sender._id,
           },
         });
-        await sender.update({
+        await sender.updateOne({
           $pull: {
             friends: receiver._id,
             following: receiver._id,
@@ -535,7 +535,7 @@ exports.deleteRequest = async (req, res) => {
             followers: sender._id,
           },
         });
-        await sender.update({
+        await sender.updateOne({
           $pull: {
             following: receiver._id,
           },
