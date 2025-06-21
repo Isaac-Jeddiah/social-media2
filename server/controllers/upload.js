@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const {cloudinary} = require("../lib/cloudinary")
+const cloudinary = require("../lib/cloudinary");
 // cloudinary.config({
 //   cloud_name: process.env.CLOUD_NAME,
 //   api_key: process.env.CLOUD_API_KEY,

@@ -8,7 +8,7 @@ const Post = require("../models/Post");
 const Code = require("../models/Code");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const cloudinary = require("cloudinary");
+const cloudinary = require("../lib/cloudinary");
 const { generateToken } = require("../helpers/tokens");
 //const { sendVerificationEmail, sendResetCode } = require("../helpers/mailer");
 const generateCode = require("../helpers/generateCode");
@@ -252,7 +252,7 @@ exports.getProfile = async (req, res) => {
     if (!profile) {
       return res.json({ ok: false });
     }
-    
+
     if (
       user.friends.includes(profile._id) &&
       profile.friends.includes(user._id)
@@ -462,7 +462,7 @@ exports.acceptRequest = async (req, res) => {
       const receiver = await User.findById(req.user.id);
       const sender = await User.findById(req.params.id);
       if (receiver.requests.includes(sender._id)) {
-        await receiver.update({
+        await receiver.updateOne({
           $push: { friends: sender._id, following: sender._id },
         });
         await sender.update({
@@ -495,7 +495,7 @@ exports.unfriend = async (req, res) => {
         receiver.friends.includes(sender._id) &&
         sender.friends.includes(receiver._id)
       ) {
-        await receiver.update({
+        await receiver.updateOne({
           $pull: {
             friends: sender._id,
             following: sender._id,
@@ -529,7 +529,7 @@ exports.deleteRequest = async (req, res) => {
       const receiver = await User.findById(req.user.id);
       const sender = await User.findById(req.params.id);
       if (receiver.requests.includes(sender._id)) {
-        await receiver.update({
+        await receiver.updateOne({
           $pull: {
             requests: sender._id,
             followers: sender._id,
@@ -633,7 +633,7 @@ exports.getFriendsPageInfos = async (req, res) => {
       .populate("friends", "first_name last_name picture username")
       .populate("requests", "first_name last_name picture username");
     const sentRequests = await User.find({
-      requests: mongoose.Types.ObjectId(req.user.id),
+      requests: new mongoose.Types.ObjectId(req.user.id),
     }).select("first_name last_name picture username");
     res.json({
       friends: user.friends,
