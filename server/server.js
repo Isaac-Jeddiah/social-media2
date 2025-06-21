@@ -14,7 +14,7 @@ dotenv.config();
 app.use(express.json());
 app.use(cors(
   {
-    origin: ["http://localhost:3000", "https://your-production-url.com"],
+    origin: ["http://localhost:3000","https://social-media-web-tan.vercel.app", "https://your-production-url.com"],
   }
 ));
 app.use(
