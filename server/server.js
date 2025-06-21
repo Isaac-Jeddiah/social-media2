@@ -12,12 +12,12 @@ dotenv.config();
 
 // middleware
 app.use(express.json());
-app.use(cors(
-  {
-    origin: ["http://localhost:3000","https://social-media-web-tan.vercel.app", "https://your-production-url.com", "https://social-media2-0t94.onrender.com" // <-- if you ever serve frontend from backend
-],
-  }
-));
+// app.use(cors(
+//   {
+//     origin: ["http://localhost:3000","https://social-media-web-tan.vercel.app", "https://your-production-url.com", "https://social-media2-0t94.onrender.com" // <-- if you ever serve frontend from backend
+// ],
+//   }
+// ));
 app.use(
   fileUpload({
     useTempFiles: true,
