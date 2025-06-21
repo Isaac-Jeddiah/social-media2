@@ -96,7 +96,7 @@ export default function LoginForm({ setVisible }) {
             className="blue_btn open_signup"
             onClick={() => setVisible(true)}
           >
-            Create Account
+            use test@example.com pwd:password123
           </button>
         </div>
         

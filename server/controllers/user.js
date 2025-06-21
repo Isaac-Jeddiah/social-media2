@@ -233,11 +233,13 @@ exports.changePassword = async (req, res) => {
       password: cryptedPassword,
     }
   );
+
   return res.status(200).json({ message: "ok" });
 };
 
 exports.getProfile = async (req, res) => {
   try {
+
     const { username } = req.params;
     const user = await User.findById(req.user.id);
     const profile = await User.findOne({ username }).select("-password");
@@ -250,7 +252,7 @@ exports.getProfile = async (req, res) => {
     if (!profile) {
       return res.json({ ok: false });
     }
-
+    
     if (
       user.friends.includes(profile._id) &&
       profile.friends.includes(user._id)
@@ -277,6 +279,7 @@ exports.getProfile = async (req, res) => {
     await profile.populate("friends", "first_name last_name username picture");
     res.json({ ...profile.toObject(), posts, friendship });
   } catch (error) {
+    console.error("Error in getProfile: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -290,6 +293,7 @@ exports.updateProfilePicture = async (req, res) => {
     });
     res.json(url);
   } catch (error) {
+    console.error("Error in updateProfilePicture: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -303,6 +307,7 @@ exports.updateCover = async (req, res) => {
     });
     res.json(url);
   } catch (error) {
+    console.error("Error in updateCover: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -322,6 +327,7 @@ exports.updateDetails = async (req, res) => {
     );
     res.json(updated.details);
   } catch (error) {
+    console.error("Error in updateDetails: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -354,6 +360,7 @@ exports.addFriend = async (req, res) => {
         .json({ message: "You can't send a request to yourself" });
     }
   } catch (error) {
+    console.error("Error in addFriend: ", error); 
     res.status(500).json({ message: error.message });
   }
 };
@@ -386,6 +393,7 @@ exports.cancelRequest = async (req, res) => {
         .json({ message: "You can't cancel a request to yourself" });
     }
   } catch (error) {
+    console.error("Error in cancelRequest: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -414,6 +422,7 @@ exports.follow = async (req, res) => {
       return res.status(400).json({ message: "You can't follow yourself" });
     }
   } catch (error) {
+    console.error("Error in follow: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -442,6 +451,7 @@ exports.unfollow = async (req, res) => {
       return res.status(400).json({ message: "You can't unfollow yourself" });
     }
   } catch (error) {
+    console.error("Error in unfollow: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -471,6 +481,7 @@ exports.acceptRequest = async (req, res) => {
         .json({ message: "You can't accept a request from  yourself" });
     }
   } catch (error) {
+    console.error("Error in acceptRequest: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -507,6 +518,7 @@ exports.unfriend = async (req, res) => {
       return res.status(400).json({ message: "You can't unfriend yourself" });
     }
   } catch (error) {
+    console.error("Error in unfriend: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -537,6 +549,7 @@ exports.deleteRequest = async (req, res) => {
       return res.status(400).json({ message: "You can't delete yourself" });
     }
   } catch (error) {
+    console.error("Error in deleteRequest: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -549,6 +562,7 @@ exports.search = async (req, res) => {
     );
     res.json(results);
   } catch (error) {
+    console.error("Error in search: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -580,6 +594,7 @@ exports.addToSearchHistory = async (req, res) => {
       });
     }
   } catch (error) {
+    console.error("Error in addToSearchHistory: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -591,6 +606,7 @@ exports.getSearchHistory = async (req, res) => {
       .populate("search.user", "first_name last_name username picture");
     res.json(results.search);
   } catch (error) {
+    console.error("Error in getSearchHistory: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -605,6 +621,7 @@ exports.removeFromSearch = async (req, res) => {
       { $pull: { search: { user: searchUser } } }
     );
   } catch (error) {
+    console.error("Error in removeFromSearch: ", error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -624,6 +641,7 @@ exports.getFriendsPageInfos = async (req, res) => {
       sentRequests,
     });
   } catch (error) {
+    console.error("Error in getFriendsPageInfos: ", error);
     res.status(500).json({ message: error.message });
   }
 };
