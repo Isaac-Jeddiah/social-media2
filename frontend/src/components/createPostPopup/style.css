@@ -10,6 +10,11 @@
   width: 500px;
   border-radius: 5px;
 }
+.postpopup {
+  top:1;
+  z-index: 9999;
+  position: fixed;
+}
 .box_header {
   position: relative;
   display: flex;

@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import PostError from "./PostError";
 import dataURItoBlob from "../../helpers/dataURItoBlob";
 import { uploadImages } from "../../functions/uploadImages";
+import { Zap } from "lucide-react";
 
 export default function CreatePostPopup({
   user,
@@ -112,7 +113,7 @@ export default function CreatePostPopup({
     }
   };
   return (
-    <div className="blur">
+    <div className="postpopup">
       <div className="postBox" ref={popup}>
         {error && <PostError error={error} setError={setError} />}
         <div className="box_header">

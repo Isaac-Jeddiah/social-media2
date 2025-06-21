@@ -7,7 +7,8 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin:["http://localhost:3000", "https://your-production-url.com","https://social-media-web-tan.vercel.app"],
+    origin:["http://localhost:3000", "https://your-production-url.com","https://social-media-web-tan.vercel.app", "https://social-media2-0t94.onrender.com" // <-- if you ever serve frontend from backend
+],
   },
 });
 
