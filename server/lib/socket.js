@@ -6,9 +6,9 @@ const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  // cors: {
-  //   origin:["http://localhost:3000", "https://your-production-url.com"],
-  // },
+  cors: {
+    origin:["http://localhost:3000", "https://your-production-url.com","https://social-media-web-tan.vercel.app"],
+  },
 });
 
 export function getReceiverSocketId(userId) {
