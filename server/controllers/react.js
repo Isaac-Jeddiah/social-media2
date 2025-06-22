@@ -7,7 +7,7 @@ exports.reactPost = async (req, res) => {
     const { postId, react } = req.body;
     const check = await React.findOne({
       postRef: postId,
-      reactBy: mongoose.Types.ObjectId(req.user.id),
+      reactBy: new mongoose.Types.ObjectId(req.user.id),
     });
     if (check == null) {
       const newReact = new React({
@@ -32,7 +32,7 @@ exports.reactPost = async (req, res) => {
 
 exports.getReacts = async (req, res) => {
   try {
-    const reactsArray = await React.find({ postRef: req.params.id });
+    const reactsArray = await React.findOne({ postRef: req.params.id });
 
     /*
     const check1 = reacts.find(
@@ -80,7 +80,7 @@ exports.getReacts = async (req, res) => {
 
     const user = await User.findById(req.user.id);
 
-    const checkSaved = user?.savedPosts.find(
+    const checkSaved = user?.savedPosts.findOne(
       (x) => x.post.toString() === req.params.id
     );
     res.json({
