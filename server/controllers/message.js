@@ -9,15 +9,17 @@ const { getReceiverSocketId, io } = require("../lib/socket");
 
 exports.getFriendsForMessaging = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).populate(
-      "friends",
-      "first_name last_name picture username"
-    );
-    res.status(200).json(user.friends);
-  } catch (error) {
-    console.error("Error in getFriendsForMessaging:", error.message);
-    res.status(500).json({ error: "Internal server error" });
-  }
+      const user = await User.findById(req.user.id)
+        .select("friends requests")
+        .populate("friends", "first_name last_name picture username")
+        .populate("requests", "first_name last_name picture username");
+      res.json({
+        friends: user.friends,
+      });
+    } catch (error) {
+      console.error("Error in getFriendsPageInfos: ", error);
+      res.status(500).json({ message: error.message });
+    }
 };
 
 

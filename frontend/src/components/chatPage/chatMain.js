@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { getFriendsPageInfos } from "../../functions/user";
 const ChatApp = () => {
   const [friends, setFriends] = useState([]);
   const [messages, setMessages] = useState([]);
@@ -8,7 +9,18 @@ const ChatApp = () => {
   const [newMessage, setNewMessage] = useState("");
     const { user } = useSelector((state) => state); // Assuming user is stored in Redux state
   const token = user.token; // Replace with real token (from localStorage/cookie)
-
+const getData = async () => {
+    dispatch({ type: "FRIENDS_REQUEST" });
+    const data = await getFriendsPageInfos(user.token);
+    
+    console.log(data);
+    setFriends(data);
+    if (data.status === "ok") {
+      dispatch({ type: "FRIENDS_SUCCESS", payload: data.data });
+    } else {
+      dispatch({ type: "FRIENDS_ERROR", payload: data.data });
+    }
+  };
   const api = axios.create({
     baseURL: "https://social-media2-0t94.onrender.com", // Change if your backend is hosted elsewhere
     headers: {
@@ -17,6 +29,7 @@ const ChatApp = () => {
   });
 
   useEffect(() => {
+    getData();
     const fetchFriends = async () => {
       const res = await api.get("/friends");
       setFriends(res.data);
