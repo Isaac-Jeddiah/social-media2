@@ -18,7 +18,7 @@ const ChatApp = () => {
 
   useEffect(() => {
     const fetchFriends = async () => {
-      const res = await api.get("/api/messages/friends");
+      const res = await api.get("/friends");
       setFriends(res.data);
     };
 
@@ -27,13 +27,13 @@ const ChatApp = () => {
 
   const fetchMessages = async (friendId) => {
     setActiveFriend(friendId);
-    const res = await api.get(`/api/messages/${friendId}`);
+    const res = await api.get(`/messages/getmessage/${friendId}`);
     setMessages(res.data);
   };
 
   const sendMessage = async () => {
     if (!newMessage.trim()) return;
-    const res = await api.post(`/api/messages/${activeFriend}`, {
+    const res = await api.post(`messages/sendmessage/${activeFriend}`, {
       text: newMessage,
     });
     setMessages((prev) => [...prev, res.data.message]);
