@@ -43,21 +43,62 @@ exports.getMessages = async (req, res) => {
 };
 
 
+// exports.sendMessage = async (req, res) => {
+//   try {
+//     const { text, image } = req.body;
+//     const { id: receiverId } = req.params;
+//     const senderId = req.user._id;
+
+//     if (!text && !image) {
+//       return res.status(400).json({ error: "Message content is empty" });
+//     }
+// const sender = await User.findById(senderId).select("friends");
+
+// if (!sender) {
+//   return res.status(404).json({ error: "Sender not found" });
+// }
+
+//     const isFriend = sender.friends.some(friendId => friendId.equals(receiverId));
+
+//     // Optional: You could log or track non-friend chats
+//     const isPublicChat = !isFriend;
+
+//     let imageUrl;
+//     if (image) {
+//       const uploadResponse = await cloudinary.uploader.upload(image);
+//       imageUrl = uploadResponse.secure_url;
+//     }
+
+//     const newMessage = new Message({
+//       senderId,
+//       receiverId,
+//       text,
+//       image: imageUrl,
+//     });
+
+//     await newMessage.save();
+
+//     const receiverSocketId = getReceiverSocketId(receiverId);
+//     if (receiverSocketId) {
+//       io.to(receiverSocketId).emit("newMessage", newMessage);
+//     }
+
+//     res.status(201).json({ message: newMessage, isPublic: isPublicChat });
+//   } catch (error) {
+//     console.log("Error in sendMessage controller: ", error.message);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// };
+
 exports.sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
-    const { id: receiverId } = req.params;
+    const receiverId = req.params.id;
     const senderId = req.user._id;
 
     if (!text && !image) {
       return res.status(400).json({ error: "Message content is empty" });
     }
-
-    const sender = await User.findById(senderId).select("friends");
-    const isFriend = sender.friends.some(friendId => friendId.equals(receiverId));
-
-    // Optional: You could log or track non-friend chats
-    const isPublicChat = !isFriend;
 
     let imageUrl;
     if (image) {
@@ -79,10 +120,9 @@ exports.sendMessage = async (req, res) => {
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }
 
-    res.status(201).json({ message: newMessage, isPublic: isPublicChat });
+    res.status(201).json({ message: newMessage });
   } catch (error) {
-    console.log("Error in sendMessage controller: ", error.message);
+    console.error("Error in sendMessage controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
