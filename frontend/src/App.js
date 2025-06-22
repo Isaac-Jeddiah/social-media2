@@ -13,7 +13,7 @@ import Login from "./pages/login";
 import Profile from "./pages/profile";
 import Home from "./pages/home";
 import Friends from "./pages/friends";
-
+import Chat from "./pages/chat";
 //routes
 import LoggedInRoutes from "./routes/LoggedInRoutes";
 import NotLoggedInRoutes from "./routes/NotLoggedInRoutes";
@@ -112,7 +112,7 @@ function App() {
             }
             exact
           />
-          <Route path="/chat" element={<ChatPage />} exact />
+          <Route path="/chat" element={<Chat />} exact />
           <Route path="/activate/:token" element={<Activate />} exact />
         </Route>
         <Route element={<NotLoggedInRoutes />}>
