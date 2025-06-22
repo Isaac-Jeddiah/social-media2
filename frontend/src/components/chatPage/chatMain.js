@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getFriendsPageInfos } from "../../functions/user";
 const ChatApp = () => {
   const [friends, setFriends] = useState([]);
   const [messages, setMessages] = useState([]);
   const [activeFriend, setActiveFriend] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const dispatch = useDispatch();
     const { user } = useSelector((state) => state); // Assuming user is stored in Redux state
   const token = user.token; // Replace with real token (from localStorage/cookie)
 const getData = async () => {
