@@ -1,24 +1,29 @@
-import User from "../models/User.js";
-import Message from "../models/message.js";
+//import User from "../models/User.js";
+const User = require("../models/User");
+//import Message from "../models/message.js";
+const Message = require("../models/message");
+//import cloudinary from "../lib/cloudinary.js";
+const cloudinary = require("../lib/cloudinary");
+//import { getReceiverSocketId,io } from "../lib/socket.js";
+const { getReceiverSocketId, io } = require("../lib/socket");
 
-import cloudinary from "../lib/cloudinary.js";
-import { getReceiverSocketId,io } from "../lib/socket.js";
-
-export const getUsersForSidebar = async (req, res) => {
+exports.getFriendsForMessaging = async (req, res) => {
   try {
-    const loggedInUserId = req.user._id;
-    const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
-
-    res.status(200).json(filteredUsers);
+    const user = await User.findById(req.user._id).populate(
+      "friends",
+      "first_name last_name picture username"
+    );
+    res.status(200).json(user.friends);
   } catch (error) {
-    console.error("Error in getUsersForSidebar: ", error.message);
+    console.error("Error in getFriendsForMessaging:", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
 
-export const getMessages = async (req, res) => {
+
+exports.getMessages = async (req, res) => {
   try {
-    const { id: userToChatId } = req.params;
+    const userToChatId = req.params.id;
     const myId = req.user._id;
 
     const messages = await Message.find({
@@ -26,24 +31,34 @@ export const getMessages = async (req, res) => {
         { senderId: myId, receiverId: userToChatId },
         { senderId: userToChatId, receiverId: myId },
       ],
-    });
+    }).sort({ createdAt: 1 }); // Optional: sort by time ascending
 
     res.status(200).json(messages);
   } catch (error) {
-    console.log("Error in getMessages controller: ", error.message);
+    console.error("Error in getMessages controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
 
-export const sendMessage = async (req, res) => {
+
+exports.sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
     const { id: receiverId } = req.params;
     const senderId = req.user._id;
 
+    if (!text && !image) {
+      return res.status(400).json({ error: "Message content is empty" });
+    }
+
+    const sender = await User.findById(senderId).select("friends");
+    const isFriend = sender.friends.some(friendId => friendId.equals(receiverId));
+
+    // Optional: You could log or track non-friend chats
+    const isPublicChat = !isFriend;
+
     let imageUrl;
     if (image) {
-      // Upload base64 image to cloudinary
       const uploadResponse = await cloudinary.uploader.upload(image);
       imageUrl = uploadResponse.secure_url;
     }
@@ -62,9 +77,10 @@ export const sendMessage = async (req, res) => {
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }
 
-    res.status(201).json(newMessage);
+    res.status(201).json({ message: newMessage, isPublic: isPublicChat });
   } catch (error) {
     console.log("Error in sendMessage controller: ", error.message);
     res.status(500).json({ error: "Internal server error" });
   }
 };
+

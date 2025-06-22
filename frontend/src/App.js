@@ -112,6 +112,7 @@ function App() {
             }
             exact
           />
+          <Route path="/chat" element={<ChatPage />} exact />
           <Route path="/activate/:token" element={<Activate />} exact />
         </Route>
         <Route element={<NotLoggedInRoutes />}>
