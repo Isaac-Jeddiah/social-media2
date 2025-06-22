@@ -94,7 +94,11 @@ exports.sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
     const receiverId = req.params.id;
-    const senderId = req.user._id;
+    const senderId = req.user?._id || req.user?.id; // Fallback if one is missing
+
+    if (!senderId) {
+      return res.status(401).json({ error: "Unauthorized: sender ID missing" });
+    }
 
     if (!text && !image) {
       return res.status(400).json({ error: "Message content is empty" });

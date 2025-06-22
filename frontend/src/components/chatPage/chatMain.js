@@ -33,7 +33,7 @@ const getData = async () => {
     getData();
     const fetchFriends = async () => {
       const res = await api.get("/friends");
-      setFriends(res.data.data.friends);
+      setFriends(res.data.friends);
     };
 
     fetchFriends();
