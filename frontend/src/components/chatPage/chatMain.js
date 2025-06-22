@@ -14,8 +14,8 @@ const getData = async () => {
     dispatch({ type: "FRIENDS_REQUEST" });
     const data = await getFriendsPageInfos(user.token);
     
-    console.log(data);
-    setFriends(data);
+    console.log(data.data.friends);
+    setFriends(data.data.friends);
     if (data.status === "ok") {
       dispatch({ type: "FRIENDS_SUCCESS", payload: data.data });
     } else {
@@ -33,7 +33,7 @@ const getData = async () => {
     getData();
     const fetchFriends = async () => {
       const res = await api.get("/friends");
-      setFriends(res.data);
+      setFriends(res.data.data.friends);
     };
 
     fetchFriends();
